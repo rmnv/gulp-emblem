@@ -1,20 +1,21 @@
 {
   "name": "gulp-emblem",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Emblem.js plugin for gulp",
   "main": "index.js",
   "dependencies": {
-    "through": "~2.3.0",
+    "event-stream": "~3.0.20",
     "handlebars": "~2.0.0",
     "emblem": "~0.3.18",
-    "gulp-util": "~2.2.0"
+    "xtend": "~2.1.2"
   },
   "devDependencies": {
     "should": "~2.1.1",
-    "mocha": "~1.17.0"
+    "mocha": "~1.15.1",
+    "gulp-util": "~2.2.6"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -25,12 +26,38 @@
     "handlebars",
     "emblem"
   ],
-  "author": "Jan Buschtöns <buschtoens@gmail.com>",
+  "author": {
+    "name": "Jan Buschtöns",
+    "email": "buschtoens@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/aulito/gulp-emblem/issues"
   },
   "engines": {
     "node": ">=0.8"
-  }
+  },
+  "readme": "# gulp-emblem [![NPM version][npm-image]][npm-url] [![Build status][travis-image]][travis-url] [![Dependency Status][gemnasium-image]][gemnasium-url]\r\n> [Emblem.js][emblem-url] plugin for gulp\r\n> ...a concise, beautiful, and fully compatible templating alternative for Handlebars.js.\r\n\r\n## Usage\r\n\r\nFirst, install `gulp-emblem` as a development dependency:\r\n\r\n```shell\r\nnpm install --save-dev gulp-emblem\r\n```\r\n\r\nThen, add it to your `gulpfile.js`:\r\n\r\n```javascript\r\nvar emblem = require('gulp-emblem');\r\n\r\ngulp.task('templates', function(){\r\n  gulp.src(['client/templates/*.em'])\r\n    .pipe(emblem({\r\n      namespace: 'MyApp.templates',\r\n      outputType: 'hybrid'\r\n     }))\r\n    .pipe(concat('templates.js'))\r\n    .pipe(gulp.dest('build/js/'));\r\n});\r\n```\r\n\r\n## API\r\n\r\n### emblem(options)\r\n\r\n#### options.namespace\r\nType: `String`\r\nDefault: `templates`\r\n\r\nThe namespace in which the precompiled templates will be assigned. Use dot notation (e.g. `App.Templates`) for nested namespaces or false to declare templates in the global namespace.\r\n\r\n#### options.outputType\r\nType: `String`\r\nDefault: `browser`\r\n\r\nThe desired output type. One of the following:\r\n\r\n* `browser` - Produce plain JavaScript files for the browser\r\n* `hybrid` - Produce Node modules that can optionally be used on the frontend\r\n* `node` - Produce Node modules\r\n* `amd` - Produce AMD modules\r\n* `commonjs` - Produce CommonJS modules\r\n* `bare` - Return an unmolested function definition\r\n\r\n#### options.declareNamespace\r\nType: `Boolean`\r\nDefault: `true`\r\n\r\nIf true, non-destructively declare all parts of the namespace. This option is only necessary when `options.type` is `browser` or `hybrid`.\r\n\r\nFor example, if the namespace is `MyApp.Templates` and a template is named `App.Header.hbs`, the following declaration will be present in the output file for that template:\r\n\r\n```javascript\r\nthis[\"MyApp\"] = this[\"MyApp\"] || {};\r\nthis[\"MyApp\"][\"templates\"] = this[\"MyApp\"][\"templates\"] || {};\r\nthis[\"MyApp\"][\"templates\"][\"App\"] = this[\"MyApp\"][\"templates\"][\"App\"] || {};\r\nthis[\"MyApp\"][\"templates\"][\"App\"][\"Header\"] = function () {};\r\n```\r\n\r\nWhen processing multiple templates under a given namespace, this will result in duplicate declarations. That is, the non-destructive declaration of the namespace will be repeated for each template compiled.\r\n\r\n#### options.processName\r\nType: `Function`\r\nDefault: Strip file extension\r\n\r\nThis option accepts a function which takes one argument (the template filepath) and returns a string which will be used as the key for the precompiled template object. By default, the filename minus the extension is used.\r\n\r\nIf this function returns a string containing periods (not including the file extension), they will be represented as a sub-namespace. See `options.declareNamespace` for an example of the effect.\r\n\r\n#### options.compilerOptions\r\nType: `Object`\r\n\r\nCompiler options to pass to `Handlebars.precompile()`.\r\n\r\n## Attributions\r\nThis project is a fork of [`gulp-handlebars`](https://github.com/lazd/gulp-handlebars) by [lazd](https://github.com/lazd).\r\n[Emblem.js][emblem-url] is a concise, beautiful, and fully compatible templating alternative for Handlebars.js.\r\n\r\n\r\n[travis-url]: http://travis-ci.org/aulito/gulp-emblem\r\n[travis-image]: https://secure.travis-ci.org/aulito/gulp-emblem.png?branch=master\r\n[npm-url]: https://npmjs.org/package/gulp-emblem\r\n[npm-image]: https://badge.fury.io/js/gulp-emblem.png\r\n[gemnasium-image]: https://gemnasium.com/Aulito/gulp-emblem.png\r\n[gemnasium-url]: https://gemnasium.com/Aulito/gulp-emblem\r\n\r\n[emblem-url]: http://emblemjs.com/\r\n",
+  "readmeFilename": "README.md",
+  "_id": "gulp-emblem@0.0.0",
+  "dist": {
+    "shasum": "c9f853ea8a793da2ded0c5128ace74eb60f7ba88",
+    "tarball": "http://registry.npmjs.org/gulp-emblem/-/gulp-emblem-0.0.0.tgz"
+  },
+  "_from": "gulp-emblem@*",
+  "_npmVersion": "1.3.5",
+  "_npmUser": {
+    "name": "silvinci",
+    "email": "buschtoens@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "silvinci",
+      "email": "buschtoens@gmail.com"
+    }
+  ],
+  "directories": {},
+  "_shasum": "c9f853ea8a793da2ded0c5128ace74eb60f7ba88",
+  "_resolved": "https://registry.npmjs.org/gulp-emblem/-/gulp-emblem-0.0.0.tgz",
+  "homepage": "https://github.com/aulito/gulp-emblem"
 }
